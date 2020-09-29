@@ -66,7 +66,7 @@ public class FlutterNativeWebViewController : FlutterMethodCallDelegate, Flutter
         switch call.method {
             case "evaluateJavascript":
                 let source = (arguments!["source"] as? String)!
-                webView?.evaluateJavaScript(source, result: result)
+                webView?.evaluateJavaScript(source, flutterResult: result)
                 break
             default:
                 result(FlutterMethodNotImplemented)

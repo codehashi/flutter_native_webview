@@ -15,7 +15,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
-  flutter_native_webview: 1504e57ab41b985783e4a693791f1456bc6f014b
+  flutter_native_webview: d8bc90bf88171547ff9a9788b84e353a80a7aa4a
 
 PODFILE CHECKSUM: aafe91acc616949ddb318b77800a7f51bffa2a4c
 

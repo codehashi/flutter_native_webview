@@ -48,19 +48,36 @@ public class FlutterNativeWebView : WKWebView, WKNavigationDelegate {
         channel?.invokeMethod("onLoadError", arguments: arguments)
     }
     
-    public func evaluateJavaScript(_ javaScriptString: String, result: FlutterResult?) {
-        evaluateJavaScript(javaScriptString, completionHandler: {(value, error) in
-                    if result == nil {
+    public func evaluateJavaScript(_ javaScriptString: String, flutterResult: FlutterResult?) {
+        if #available(iOS 14.0, *) {
+            let wkContentWorld = WKContentWorld.defaultClient
+            evaluateJavaScript(javaScriptString, in: nil, in: wkContentWorld, completionHandler: { result in
+                if flutterResult == nil {
+                    return
+                }
+                
+                switch result {
+                    case .success(let message):
+                        flutterResult?(message)
+                    case .failure(_):
                         return
-                    }
-                    
-                    if value == nil {
-                        result!(nil)
-                        return
-                    }
-                    
-                    result!(value)
-                })
+                }
+            })
+        } else {
+            evaluateJavaScript(javaScriptString, completionHandler: {(value, error) in
+                if flutterResult == nil {
+                    return
+                }
+                
+                if value == nil {
+                    flutterResult!(nil)
+                    return
+                }
+                
+                flutterResult!(value)
+            })
+        }
+        
     }
 }
 

@@ -16,7 +16,14 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
           body: SafeArea(
-              child: NativeWebView(initialUrl: "https://www.google.com"))),
+              child: NativeWebView(
+        initialUrl: "https://www.google.com",
+        onLoadStop: (controller) async {
+          final content = await controller.evaluateJavascript(
+              source: 'document.documentElement.outerHTML');
+          print(content);
+        },
+      ))),
     );
   }
 }
