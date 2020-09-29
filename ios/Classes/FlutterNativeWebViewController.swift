@@ -37,6 +37,7 @@ public class FlutterNativeWebViewController : FlutterMethodCallDelegate, Flutter
         let configuration = WKWebViewConfiguration()
         
         if #available(iOS 14.0, *) {
+            configuration.limitsNavigationsToAppBoundDomains = true
             let preferences = WKWebpagePreferences()
             preferences.allowsContentJavaScript = true
             configuration.defaultWebpagePreferences = preferences
