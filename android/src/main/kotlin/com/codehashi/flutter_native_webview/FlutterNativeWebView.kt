@@ -21,13 +21,13 @@ class FlutterNativeWebView(messenger: BinaryMessenger, context: Context?, id: In
     init {
         channel.setMethodCallHandler(this)
         val initialUrl = params?.get("initialUrl") as String?
-        webView = WebView(context)
+        webView = WebView(context!!)
         val loginWebViewClient = LoginWebViewClient()
         webView.webViewClient = loginWebViewClient
         webView.settings.javaScriptEnabled = true
         webView.settings.cacheMode = WebSettings.LOAD_NO_CACHE
         clearCookies(context)
-        webView.loadUrl(initialUrl)
+        webView.loadUrl(initialUrl!!)
     }
 
     override fun getView(): View {
@@ -40,9 +40,11 @@ class FlutterNativeWebView(messenger: BinaryMessenger, context: Context?, id: In
         when (call.method) {
             "evaluateJavascript" -> {
                 val source = call.argument<String>("source")
-                webView.evaluateJavascript(source) {
-                    val unescapedValue = StringEscapeUtils.unescapeJava(it)
-                    result.success(unescapedValue)
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                    webView.evaluateJavascript(source!!) {
+                        val unescapedValue = StringEscapeUtils.unescapeJava(it)
+                        result.success(unescapedValue)
+                    }
                 }
             }
             else -> result.notImplemented()

@@ -2,7 +2,7 @@ group 'com.codehashi.flutter_native_webview'
 version '1.0-SNAPSHOT'
 
 buildscript {
-    ext.kotlin_version = '1.3.50'
+    ext.kotlin_version = '1.4.21'
     repositories {
         google()
         jcenter()
@@ -25,13 +25,13 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 30
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
     defaultConfig {
-        minSdkVersion 16
+        minSdkVersion 17
     }
     lintOptions {
         disable 'InvalidPackage'
