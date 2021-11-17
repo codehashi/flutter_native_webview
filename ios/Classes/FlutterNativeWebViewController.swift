@@ -35,17 +35,11 @@ public class FlutterNativeWebViewController : FlutterMethodCallDelegate, Flutter
         let url = initialUrl ?? "about:blank"
         
         let configuration = WKWebViewConfiguration()
+        configuration.limitsNavigationsToAppBoundDomains = true
         
-        if #available(iOS 14.0, *) {
-            configuration.limitsNavigationsToAppBoundDomains = true
-            let preferences = WKWebpagePreferences()
-            preferences.allowsContentJavaScript = true
-            configuration.defaultWebpagePreferences = preferences
-        } else {
-            let preferences = WKPreferences()
-            preferences.javaScriptEnabled = true
-            configuration.preferences = preferences
-        }
+        let preferences = WKWebpagePreferences()
+        preferences.allowsContentJavaScript = true
+        configuration.defaultWebpagePreferences = preferences
         
         let request = URLRequest(url: URL(string: url)!)
         

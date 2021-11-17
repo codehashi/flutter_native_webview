@@ -49,7 +49,6 @@ public class FlutterNativeWebView : WKWebView, WKNavigationDelegate {
     }
     
     public func evaluateJavaScript(_ javaScriptString: String, flutterResult: FlutterResult?) {
-        if #available(iOS 14.0, *) {
             let wkContentWorld = WKContentWorld.defaultClient
             evaluateJavaScript(javaScriptString, in: nil, in: wkContentWorld, completionHandler: { result in
                 if flutterResult == nil {
@@ -63,21 +62,6 @@ public class FlutterNativeWebView : WKWebView, WKNavigationDelegate {
                         return
                 }
             })
-        } else {
-            evaluateJavaScript(javaScriptString, completionHandler: {(value, error) in
-                if flutterResult == nil {
-                    return
-                }
-                
-                if value == nil {
-                    flutterResult!(nil)
-                    return
-                }
-                
-                flutterResult!(value)
-            })
-        }
-        
     }
 }
 
