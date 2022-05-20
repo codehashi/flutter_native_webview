@@ -14,9 +14,9 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/flutter_native_webview/ios"
 
 SPEC CHECKSUMS:
-  Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+  Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
   flutter_native_webview: d8bc90bf88171547ff9a9788b84e353a80a7aa4a
 
 PODFILE CHECKSUM: 5bc1cecf9b027b5f9f99a57c507457ec6019d59a
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.11.2
